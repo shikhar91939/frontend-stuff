@@ -1,0 +1,100 @@
+<div class="redmi-banner">
+<div class="redmi-bound">
+<div class="rb-left"><img src="{{media url="wysiwyg/redmi-hero.png"}}" alt="" /></div>
+<div class="rb-right">
+<div class="rb-text"><img src="{{media url="wysiwyg/redmi.png"}}" alt="" /> <br /> Dual Sim <br /> 8GB Flash Memory <br /> Snapdragon 400 chipset</div>
+<div class="coming" style="padding: 0 10px;">Starts at Rs.4599 in unboxed and refurbed.</div>
+<div class="status-msg titleText" style="margin-top: 5px; font-size: 1.25em; font-family: Karla; font-weight: bold;">&nbsp;</div>
+<button class="r-now btn-1a register-btn" style="margin-top: 10px;">REGISTER FOR SALE</button></div>
+</div>
+</div>
+<!--<div class="order-ends">
+<div class="wrapper-countdown">
+<div id="countdown-container"><span id="countdown-span">SALE STARTS IN</span>
+<div id="countdown-timer">&nbsp;</div>
+</div>
+<script type="text/javascript">// <![CDATA[
+	jQuery(document).ready(function(){
+	        jQuery('.order-ends').delay(3200).slideDown(700);
+	});
+// ]]></script>
+</div>
+</div>-->
+<div class="redmi-content">
+<div class="redmi-bound">
+<ul class="redmi_ul">
+<li><span class="redmi_icon"><img src="{{media url="wysiwyg/cpu1.png"}}" alt="" /></span>
+<h3>Blazing Fast Processor</h3>
+<p>1.6 GHz quad-core Qualcomm Snapdragon 400 processor with Cortex-A7 core, which gives amazing performance.</p>
+</li>
+<li><span class="redmi_icon"><img src="{{media url="wysiwyg/camera1.png"}}" alt="" /></span>
+<h3>Smart Pictures</h3>
+<p>Get that soft blur in the background with the F2.2 aperture and 28mm wide angle lens.</p>
+</li>
+<li><span class="redmi_icon"><img src="{{media url="wysiwyg/sound.png"}}" alt="" /></span>
+<h3>Stunning Sound</h3>
+<p>The Redmi 1S features the same sound technology used by BMW, Bentley, and Rolls Royce.&nbsp;</p>
+</li>
+</ul>
+<div>{{widget type="cms/widget_block" template="cms/widget/static_block/default.phtml" block_id="163"}}</div>
+<p>{{widget type="cms/widget_block" template="cms/widget/static_block/default.phtml" block_id="162"}}</p>
+</div>
+</div>
+<div id="pop-form" class="login-fr-pou" style="display: none;">
+<div class="login-box" style="background: url('http://assets.overcart.com/media/wysiwyg/popupimage.jpg'),
+linear-gradient(to right, rgba(255, 255, 255, 1),  rgba(255, 255, 255, 1)); background-repeat: no-repeat, no-repeat, repeat; background-position: top right, left, right;">{{block type ="Mage_Customer_Block_Form_login" template="facebookfree/login.phtml" }} <span class="close" onclick="hidePopup()">X</span></div>
+<div class="register-box">{{block type ="Mage_Customer_Block_Form_Register" template="persistent/customer/form/register.phtml" }} <span class="close" onclick="hidePopup()">X</span></div>
+</div>
+<div id="login-background" style="color: #fff; height: 90px; font-style: italic;">
+<h1 style="color: #fff; font-weight: bold; font-size: 2em; text-align: center;"><span style="border-bottom: 1px solid #fff;">REDMI 1S IS HERE!</span></h1>
+<p style="padding-top: 0px; margin-top: 0px; text-align: center; font-weight: bold;">LOGIN/SIGN UP TO REGISTER FOR SALE NOTIFICATIONS.</p>
+</div>
+<script type="text/javascript">// <![CDATA[
+jQuery(document).ready(function(){
+    jQuery("#login-background").detach().insertBefore(".account-login");
+});
+var login_url = '{{config path="web/unsecure/base_url"}}redmisale/index/login';
+var register_url = '{{config path="web/unsecure/base_url"}}redmisale/index/create';
+var register_Sale = '{{config path="web/unsecure/base_url"}}redmisale/index/registerCustomer';
+
+<!-- Countdown Timer -->
+
+CountDownTimer('03/23/2015 02:00 PM', 'countdown-timer'); //Month.Day
+
+    function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById(id).innerHTML = '<a href="http://www.overcart.com/redmi-store.html">REFRESH</a><div class="todya-order-det"style="margin-top:-50px; font-family: \'Lato\', sans-serif;font-size: 18px; color:#e74c3c"><br /> <span>this page to buy a REDMI 1S</span></div>';
+
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = days*24+Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+
+            document.getElementById(id).innerHTML = hours + '<span class="time">H</span> ';
+            document.getElementById(id).innerHTML += minutes + '<span class="time">M</span> ';
+            document.getElementById(id).innerHTML += seconds + '<span class="time">S</span>';
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+<!-- Countdown Timer -->
+// ]]></script>
+<p>{{widget type="cms/widget_block" template="cms/widget/static_block/default.phtml" block_id="164"}}</p>
