@@ -1,0 +1,52 @@
+<div class="wrapper-banner-listing" style="border: 1px solid #d8dbe0;"><!-- 1px solid #d8dbe0 -->
+<p><a href="{{store url=''}}typhoontuesdays.html"><img src="//overcart.com/media/wysiwyg/TT-Page-Banner-31_March.jpg" alt="typhoon tuesday, Overcart.com" /> </a></p>
+<div class="wrapper-countdown">
+<div id="countdown-container"><span id="countdown-span">OFFER ENDS IN</span>
+<div id="countdown-timer">&nbsp;</div>
+</div>
+</div>
+<div class="typoon_btns"><a id="button1" class="r-now btn-1a" style="margin-top: 10px;" href="http://www.overcart.com/typhoontuesdays.html#hardware_type=197-195">MOBILES&nbsp; &amp; &nbsp;TABLETS</a> <a id="button2" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=199">LAPTOPS</a><a id="button3" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=275-276">CAMERAS</a></div>
+</div>
+<!--  Wrapper-banner-listing -->
+<script type="text/javascript">// <![CDATA[
+<!-- Countdown Timer -->
+CountDownTimer('04/01/2015 11:59 AM', 'countdown-timer'); //Month.Day
+
+    function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById(id).innerHTML = 'EXPIRED!';
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = days*24+Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+
+            document.getElementById(id).innerHTML = hours + '<span class="time">H</span> ';
+            document.getElementById(id).innerHTML += minutes + '<span class="time">M</span> ';
+            document.getElementById(id).innerHTML += seconds + '<span class="time">S</span>';
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+// ]]></script>
+<!-- Countdown Timer -->
+<script type="text/javascript">// <![CDATA[
+jQuery('body > section.main-container.col2-right-layout > div > article > div.category-description.std').hide();
+// ]]></script>
