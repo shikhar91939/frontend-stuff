@@ -1,3 +1,15 @@
+<style>
+#button1, #button2, #button3
+{
+     border: 3px solid rgb(65, 131, 215);
+     color: rgb(65, 131, 215);
+}
+#button1:hover, #button2:hover, #button3:hover
+{
+     background-color: rgb(65, 131, 215);
+     color:rgb(255, 255, 255);
+}
+</style>
 <div class="wrapper-banner-listing" style="border: 1px solid #d8dbe0;"><!-- 1px solid #d8dbe0 -->
 <p><a href="{{store url=''}}typhoontuesdays.html"><img src="//overcart.com/media/wysiwyg/TT-Page-Banner-31_March.jpg" alt="typhoon tuesday, Overcart.com" /> </a></p>
 <div class="wrapper-countdown">
@@ -5,12 +17,13 @@
 <div id="countdown-timer">&nbsp;</div>
 </div>
 </div>
-<div class="typoon_btns"><a id="button1" class="r-now btn-1a" style="margin-top: 10px;" href="http://www.overcart.com/typhoontuesdays.html#hardware_type=197-195">MOBILES&nbsp; &amp; &nbsp;TABLETS</a> <a id="button2" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=199">LAPTOPS</a><a id="button3" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=275-276">CAMERAS</a></div>
+<div class="typoon_btns"><a id="button1" class="r-now btn-1a" style="margin-top: 10px;" href="http://www.overcart.com/typhoontuesdays.html#hardware_type=197-195">MOBILES&nbsp; & &nbsp;TABLETS</a> <a id="button2" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=199">LAPTOPS</a><a id="button3" class="r-now btn-1a" style="margin-top: 10px;" href="//www.overcart.com/typhoontuesdays.html#hardware_type=275-276">CAMERAS</a></div>
 </div>
 <!--  Wrapper-banner-listing -->
 <script type="text/javascript">// <![CDATA[
 <!-- Countdown Timer -->
 CountDownTimer('04/01/2015 11:59 AM', 'countdown-timer'); //Month.Day
+
     function CountDownTimer(dt, id)
     {
         var end = new Date(dt);
