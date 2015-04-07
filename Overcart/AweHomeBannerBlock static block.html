@@ -1,0 +1,80 @@
+<!--<div class="order-ends">
+<div class="todya-order-det"><strong style="color: #4183d7;">TYPHOON TUESDAYS.</strong></div>
+<div class="use-order-code" style="background: #4183d7;"><span> SAVE UPTO </span><br /><strong>92 %</strong></div>
+<div class="order-ends-det"><br /> <span style="text-decoration: underline;"> <a style="color: #4183d7;" href="{{store url=''}}typhoontuesdays.html?ref=homebanner">SHOP NOW</a> </span></div>
+</div>
+<script type="text/javascript">// <![CDATA[
+    jQuery(document).ready(function(){
+    jQuery('.order-ends').delay(3200).slideDown(700);
+    });
+// ]]></script>--><!-- redmi timer Starts --><!--<div class="order-ends">
+<div class="wrapper-countdown">
+<div id="countdown-container"><span id="countdown-span">REDMI SALE Starts in</span>
+<div id="countdown-timer" style="font-size: 5.5em;"></div>
+</div>
+<script type="text/javascript">// <![CDATA[
+    jQuery(document).ready(function(){
+        jQuery("body > section.main-col").css({"margin-top": "5px"});
+            jQuery('.order-ends').delay(3200).slideDown(700);
+    });
+// ]]></script>
+</div>
+</div>-->
+<div class="offer-banner-section">
+<div class="col"><a href="//www.overcart.com/mobiles/brands.html#hardware_type=197&amp;custom_stock_status=337"><img src="//www.overcart.com/media/wysiwyg/26March-285x197-Banner-26-1.jpg" alt="Best Mobile Deals at Overcart.com" /></a></div>
+<div class="col"><a href="{{store url=''}}love"><img src="//www.overcart.com/media/wysiwyg/26March285x197-Banner-2.jpg" alt="Customer feedback for Overcart.com" /></a></div>
+<div class="col"><a href="//www.overcart.com/mobiles/brands.html#hardware_type=195"><img src="//www.overcart.com/media/wysiwyg/26March-285x197-Banner-3.jpg" alt="Android phones at Overcart.com phones" /></a></div>
+<div class="col-last"><a href="//www.overcart.com/new-arrivals.html"><img src="//www.overcart.com/media/wysiwyg/26March-285x197-Banner-4.jpg" alt="New Arrivials" /></a></div>
+</div>
+<div class="quality-money">
+<ul>
+<li class="quality">
+<h3>We Never Compromise on Quality</h3>
+<p>Unboxed and refurbished don't mean low quality.</p>
+</li>
+<li class="money">
+<h3>We Give You Value For Money</h3>
+<p>Our products help you buy a better device at the same price.</p>
+</li>
+</ul>
+</div>
+<!-- Countdown Timer -->
+<script type="text/javascript">// <![CDATA[
+CountDownTimer('03/23/2015 02:00 PM', 'countdown-timer'); //Month.Day
+
+    function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById(id).innerHTML = '<a href="//www.overcart.com/redmi-store.html">THE SALE IS ON!</a>';
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = days*24+Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+
+            document.getElementById(id).innerHTML = hours + '<span class="time">H</span> ';
+            document.getElementById(id).innerHTML += minutes + '<span class="time">M</span> ';
+            document.getElementById(id).innerHTML += seconds + '<span class="time">S</span>';
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+<!-- Countdown Timer -->
+// ]]></script>
+<p>{{widget type="cms/widget_block" template="cms/widget/static_block/default.phtml" block_id="164"}}</p>
