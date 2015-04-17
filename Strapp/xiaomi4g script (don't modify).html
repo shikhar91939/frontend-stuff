@@ -1,0 +1,371 @@
+<script type="text/javascript">// <![CDATA[
+/**
+ * Author: Anil Jaiswal
+ * Date Created: 30th December, 2014
+ * Updated: 18th March, 2014
+ */
+
+jQuery(document).ready(function(){
+	jQuery("#register-btn").attr("onclick", "showRegister()");
+	jQuery(".register-box").detach().appendTo('#pop-form');
+	jQuery("#pop-form > span").detach().appendTo('.login-box');
+        jQuery('.fb-login').hide();
+	jQuery('ul#og-grid.og-grid li').on("click", "div > div > div.og-details > a", function (e)
+	{
+  		e.preventDefault();
+		if(email_id)
+		{
+			if( getCookie("redmi_sale") == "registered" )
+			{
+				jQuery('#og-grid > li.og-expanded > div > div > div.og-details > div.titleText')
+                .html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">You\'re  already registered.</span>');
+				
+				jQuery("#og-grid > li.og-expanded > div > div > div.og-details > a").html("REGISTERED");
+			}
+			else
+			{
+				registerMail("gallery");
+			}
+		}
+		else
+		{
+			//jQuery('#og-grid > li.og-expanded > div > div > div.og-details > div.titleText').html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">Please Login or Sign Up to register</span>');
+			
+			//jQuery('#og-grid > li.og-expanded > div > div > div.og-details > a').html("Login / Sign Up");
+			
+			//jQuery('#og-grid > li.og-expanded > div > div > div.og-details > a').off().on('click',function()
+			//{
+				jQuery("#login-form").attr("action", login_url);
+				jQuery("#form-validate").attr("action", register_url);
+				var backButton = jQuery('#form-validate > fieldset > div.buttons-set > a');
+				backButton.attr({"href":"#", "onclick":"showPopup()"});
+				jQuery('p.required').show();
+				showPopup();
+			//});
+			return false;
+		}
+	});
+	if(email_id)
+	{
+		if( getCookie("redmi_sale") == "registered" )
+		{
+			jQuery(".status-msg.titleText")
+			.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">You\'re  already registered.</span>');
+			jQuery(".register-btn").html("REGISTERED");
+		}
+	}
+});
+
+var registerBtn = jQuery(".register-btn");
+var titleText = jQuery(".status-msg.titleText");
+
+// Customer Account Login Form
+jQuery('#login-form').on('submit', function(e)
+{
+	e.preventDefault();
+	url = login_url;
+	jQuery.ajax({
+		type:'POST',
+		url:url,
+		success:function(resp){
+			if(resp.status=="ok"){
+				setLoginBtnText(resp.msg);
+				var emailAddress = jQuery("#email").val();
+    			jQuery('<script>')
+    				.attr('type', 'text/javascript')
+    				.text('var email_id = "'+emailAddress+'"')
+    				.appendTo('head');
+    			registerMail("login");
+			}
+			else
+			{
+				setLoginBtnText(resp.msg);
+			}
+		},
+		error:function(resp){
+			setLoginBtnText("Something went wrong! Please try again.");
+		},
+		data:jQuery(this).serialize(),
+		dataType:"json"
+	});
+	return false;
+});
+
+// Customer Account Registration Form
+jQuery('#form-validate').on('submit', function(e)
+{
+	e.preventDefault();
+	url = register_url;
+	jQuery.ajax({
+		type:'POST',
+		url:url,
+		success:function(resp){
+			switch(resp.status)
+			{
+				case "ok":
+					setCustomerCreationMsg(resp.msg);
+					if(!email_id)
+					{
+					   var emailAdd = jQuery("#email_address").val();
+						jQuery('<script>')
+						.attr('type', 'text/javascript')
+						.text('var email_id = "'+emailAdd+'"')
+						.appendTo('head');
+					}
+					registerMail("create");
+					break;
+				default:
+					setCustomerCreationMsg(resp.msg);
+					break;
+			}
+		},
+		error:function(resp){
+			setCustomerCreationMsg("Something went wrong! Please try again.");
+		},
+		data:jQuery(this).serialize(),
+		dataType:"json"
+	});
+	return false;
+});
+
+
+function processResponse(caseType, method, response)
+{
+	if(caseType == "ok")
+	{
+		switch(method){
+			case "login":
+				setLoginBtnText(response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+				break;
+			case "create":
+				setCustomerCreationMsg(response);
+				setTimeout(function(){
+					location.reload();
+				}, 2000);
+				break;
+			case "register":
+				registeredMsg();
+				break;
+			case "gallery":
+				jQuery('#og-grid > li.og-expanded > div > div > div.og-details > div.titleText')
+					.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">'+response+'</span>');
+				break;
+			default:
+				break;
+		}
+	}
+	else
+	{
+		switch(method){
+			case "login":
+				setLoginBtnText(response);
+                                setTimeout(function(){
+					location.reload();
+				}, 2000);
+				break;
+			case "create":
+				setCustomerCreationMsg(response);
+                                setTimeout(function(){
+					location.reload();
+				}, 2000);
+				break;
+			case "register":
+				titleText.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">'+response+'</span>');
+				break;
+			case "gallery":
+				jQuery('#og-grid > li.og-expanded > div > div > div.og-details > div.titleText')
+					.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">'+response+'</span>');
+				break;
+			default:
+				break;
+		}
+	}
+}
+
+
+//Attempt to register for sale	
+function registerMail(method)
+{
+	loadingState();
+	jQuery.ajax({
+		type:'POST',
+		url:register_Sale,
+		success:function(resp){
+			if(resp.status == 'ok')
+			{
+				setCookie("redmi_sale", "registered", 15);
+				processResponse(resp.status, method, resp.msg);
+			}
+                        if(resp.status=='error')
+                        {
+            	                processResponse(resp.status, method, resp.msg);
+			}
+                        else
+                        {
+                                processResponse(resp.status, method, resp.msg);
+                        }
+		},
+		error:function(resp){
+			titleText.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">Something went wrong! Please try again.</span>');
+			jQuery('#og-grid > li.og-expanded > div > div > div.og-details > div.titleText')
+					.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">Something went wrong! Please try again.</span>');
+		},
+		data:{email: email_id, productId: 'XIAOMI4G', productName: 'Xiomi 4g'},
+		dataType:"json"
+	});
+        readyState();
+}
+
+
+var createAccountBtn = jQuery("#register-btn");
+var registerDiv = jQuery(".register");
+ 
+
+//Bind ON click event to REGISTER NOW Button
+registerBtn.on("click", function (e)
+{
+	e.preventDefault();
+        jQuery("#login-form").attr("action", login_url);
+			jQuery("#form-validate").attr("action", register_url);
+			var backButton = jQuery('#form-validate > fieldset > div.buttons-set > a');
+			backButton.attr({"href":"#", "onclick":"showPopup()"});
+	//If logged in
+	if(email_id)
+	{
+		if(getCookie("redmi_sale")==="registered")
+		{
+			titleText.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">You\'re  already registered.</span>');
+			registerBtn.html("REGISTERED");
+			registerBtn.off();
+		}
+		else
+		{
+			registerMail("register");
+		}
+	}
+	//Ask to login/register
+	else
+	{
+		//titleText.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">Please Login or Sign Up to register</span>');
+		//registerBtn.html("Login / Sign Up");
+		//registerBtn.off().on('click',function(){
+			
+			jQuery('p.required').show();
+			showPopup();
+		//});
+		return false;
+	}
+});
+
+//Display success message on registration
+function registeredMsg()
+{
+	titleText.html('<span style="font-family:Lato;font-style:italic;font-size:1.25em;color:#e74c3c;">Congratulations! Registration successful.</span>');
+	registerBtn.html("REGISTERED");
+        registerBtn.off();
+}
+
+//Show create account popup
+function showRegister()
+{
+	jQuery('.login-box').hide();
+	jQuery('.register-box').show();
+}
+
+
+//Show Registration popup
+function showPopup()
+{
+	jQuery('#pop-form').show();
+    jQuery('.login-box').show();
+	jQuery('.register-box').hide();
+	jQuery('#login-form > div > div.col-2.registered-users.user-terms').remove();
+}
+
+//Hide Registration popup
+function hidePopup()
+{
+	jQuery('#pop-form').hide();
+	jQuery('.login-box').hide();
+	jQuery('.register-box').hide();
+}
+
+//Set cookie
+function setCookie(cname, cvalue, exdays) 
+{
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+//Get cookie by name
+function getCookie(cname) 
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+function successState (msg) 
+{
+	registerDiv.addClass('msg-success').html(msg);
+}
+
+function errorState (msg)
+{
+	registerDiv.addClass('msg-error').html(msg);
+}
+
+function loadingState()
+{
+	registerBtn.html("Loading...");
+}
+
+function readyState()
+{
+	registerBtn.html("REGISTER FOR SALE NOW");
+}
+
+function setLoginBtnText(login_message)
+{
+	jQuery('div.account-login').after('<p class="login-msg" style="color:red;">'+login_message+'</p>');
+	setTimeout(function(){
+		jQuery("p.login-msg").fadeOut("slow");
+	}, 3000);
+}
+
+function setCustomerCreationMsg(msg)
+{
+	msg = msg.toString();
+	
+	var multi = '';
+
+	if (msg.indexOf(',') > -1)
+	{ 
+		multi = msg.split(',');
+	}
+
+	if(jQuery.isArray(multi))
+	{
+		multi.forEach(function(message){
+			jQuery('.field').last().after('<span class="register-msg" style="color:red;display:block;">'+message+'</span>');
+		});
+	}
+	else
+	{
+		jQuery('.field').last().after('<span class="register-msg" style="color:red;display:block;">'+msg+'</span>');
+	}
+	setTimeout(function(){
+		jQuery("span.register-msg").fadeOut("slow");
+	}, 6000);
+}
+// ]]></script>
