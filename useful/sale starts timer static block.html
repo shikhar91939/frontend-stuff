@@ -1,0 +1,67 @@
+<div class="order-ends">
+<div class="wrapper-countdown">
+<div id="countdown-container"><span id="countdown-span">SALE STARTS IN</span>
+<div id="countdown-timer">&nbsp;</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">// <![CDATA[
+    jQuery(document).ready(function(){
+            jQuery('.order-ends').delay(3200).slideDown(700);
+    });
+// ]]>
+<!-- Countdown Timer -->
+
+CountDownTimer('05/06/2015 02:00 PM', 'countdown-timer'); //Month.Day
+
+    function CountDownTimer(dt, id)
+    {
+        var end = new Date(dt);
+
+        var _second = 1000;
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById(id).innerHTML = '<a href="http://www.overcart.com/mi-redmi.html">REFRESH</a><div class="todya-order-det"style="margin-top:-50px; font-family: \'Lato\', sans-serif;font-size: 18px; color:#e74c3c"><br /> <span>this page to buy a REDMI 1S</span></div>';
+
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = /*days*24+*/Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+            if(days>0)
+            {
+                var days = Math.floor(distance / _day);
+                var hours = /*days*24+*/Math.floor((distance % _day) / _hour);
+                var minutes = Math.floor((distance % _hour) / _minute);
+                var seconds = Math.floor((distance % _minute) / _second);
+                document.getElementById(id).innerHTML = days + '<span class="time">D</span> ';
+                document.getElementById(id).innerHTML += hours + '<span class="time">H</span> ';
+                document.getElementById(id).innerHTML += minutes + '<span class="time">M</span> ';
+                document.getElementById(id).innerHTML += seconds + '<span class="time">S</span>';
+            }else{
+                var hours = days*24+Math.floor((distance % _day) / _hour);
+                var minutes = Math.floor((distance % _hour) / _minute);
+                var seconds = Math.floor((distance % _minute) / _second);
+                document.getElementById(id).innerHTML = hours + '<span class="time">H</span> ';
+                document.getElementById(id).innerHTML += minutes + '<span class="time">M</span> ';
+                document.getElementById(id).innerHTML += seconds + '<span class="time">S</span>';
+            }
+
+        }
+
+        timer = setInterval(showRemaining, 1000);
+    }
+<!-- Countdown Timer -->
+// ]]></script>
